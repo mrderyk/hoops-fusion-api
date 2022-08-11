@@ -14,6 +14,9 @@ const PlayerDirectoryEntry = new GraphQLObjectType({
     },
     last_name: {
       type: GraphQLString,
+    },
+    img_url: {
+      type: GraphQLString,
     }
   }),
 });
@@ -36,7 +39,8 @@ const buildSql = (startsWith: string) => {
     SELECT
       first_name,
       last_name,
-      key
+      key,
+      bbref_img_url as img_url
     FROM players
     WHERE last_name LIKE '${startsWith.toUpperCase()}%'
     ORDER BY last_name asc;
