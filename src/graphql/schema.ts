@@ -8,6 +8,7 @@ import { getPlayerStatsPerGame, getPlayerStatsPerGamePlayoffs } from './queries/
 import { getPlayerTotalsRegular, getPlayerTotalsPlayoffs } from './queries/total_stats';
 import { getPlayerSocials } from './queries/socials';
 import { getChartData } from './queries/chart-data';
+import { getLeagueLeaders } from './queries/getLeagueLeaders'
 
 const QueryRoot = new GraphQLObjectType({
   name: 'Query',
@@ -26,6 +27,7 @@ const QueryRoot = new GraphQLObjectType({
     getPlayerTotalsPlayoffs,
     getPlayerSocials,
     getChartData,
+    getLeagueLeaders,
   })
 })
 
