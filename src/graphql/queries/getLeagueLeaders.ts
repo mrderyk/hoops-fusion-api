@@ -4,7 +4,7 @@ import {
   GraphQLObjectType,
   GraphQLString
 } from 'graphql';
-import { pool } from '../db';
+import { pool } from '../../pool';
 
 const StatLeaders = new GraphQLObjectType({
   name: 'StatLeaders',

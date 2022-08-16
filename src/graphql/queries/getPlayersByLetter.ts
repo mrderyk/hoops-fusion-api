@@ -1,7 +1,7 @@
 import {
   GraphQLList, GraphQLObjectType, GraphQLString
 } from 'graphql';
-import { pool } from '../db';
+import { pool } from '../../pool';
 
 const PlayerDirectoryEntry = new GraphQLObjectType({
   name: 'PlayerDirectoryEntry',

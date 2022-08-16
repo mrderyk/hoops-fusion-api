@@ -6,7 +6,7 @@ import {
   GraphQLString,
   GraphQLUnionType
 } from 'graphql';
-import { pool } from '../db';
+import { pool } from '../../pool';
 
 const PlayerChartStat = new GraphQLObjectType({
   name: 'PlayerChartStat',

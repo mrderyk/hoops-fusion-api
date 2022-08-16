@@ -22,7 +22,10 @@ const startServer = async () => {
   apolloServer.applyMiddleware({
       app,
       path: '/api',
-      cors: false,
+      cors: true,
+      //cors: {
+      //  origin: [process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.hoopsfusion.com'],
+      //},
   });
 
   httpServer.listen({ port: process.env.PORT || 4000 }, () =>

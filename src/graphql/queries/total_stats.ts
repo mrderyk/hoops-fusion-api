@@ -4,7 +4,7 @@ import {
   GraphQLString
 } from 'graphql';
 import joinMonster, { Direction } from 'join-monster';
-import { pool } from '../db';
+import { pool } from '../../pool';
 import { PlayerTotalsPlayoffs, PlayerTotalsRegular } from '../types/stats';
 
 const baseQuery = (type: GraphQLObjectType) => ({

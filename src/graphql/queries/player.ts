@@ -4,7 +4,7 @@ import {
 } from 'graphql';
 import joinMonster from 'join-monster';
 import { Player } from '../types/player';
-import { pool } from '../db';
+import { pool } from '../../pool';
 
 export const player = {
   type: new GraphQLList(Player),
