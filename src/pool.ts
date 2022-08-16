@@ -15,5 +15,3 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export const pool = new Pool(connectConfig);
-
-console.log(process.env);
