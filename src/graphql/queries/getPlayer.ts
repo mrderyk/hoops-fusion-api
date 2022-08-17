@@ -1,8 +1,11 @@
 import {
   GraphQLInt,
+  GraphQLList,
   GraphQLObjectType,
   GraphQLString
 } from 'graphql';
+import joinMonster from 'join-monster';
+import { pool } from '../../pool';
 
 export const Player = new GraphQLObjectType({
   name: 'Player',
@@ -151,3 +154,23 @@ export const Player = new GraphQLObjectType({
     }
   })
 });
+
+export const getPlayer = {
+  type: new GraphQLList(Player),
+  args: {
+    key: { type: GraphQLString }
+  },
+  extensions: {
+    joinMonster: {
+      where: (playersTable: any , args: any, context: any) => {
+        const key = args.key;
+        return `key = '${key}'`
+      }
+    }
+  },
+  resolve: (parent: any, args: any, context: any, resolveInfo: any) => {
+    return joinMonster(resolveInfo, {}, (sql: any) => {
+      return pool.query(sql);
+    })
+  }
+}

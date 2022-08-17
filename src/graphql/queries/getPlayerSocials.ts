@@ -1,10 +1,38 @@
 import {
   GraphQLList,
+  GraphQLObjectType,
   GraphQLString
 } from 'graphql';
 import joinMonster, { Direction } from 'join-monster';
 import { pool } from '../../pool';
-import { PlayerSocials } from '../types/socials';
+
+const PlayerSocials = new GraphQLObjectType({
+  name: 'PlayerSocials',
+  fields: () => ({
+    playerKey: {
+      type: GraphQLString,
+      extensions: {
+        joinMonster: {
+          sqlColumn: 'player_key',
+        }
+      },
+    },
+    youtubeVideoIds: {
+      type: new GraphQLList(GraphQLString),
+      extensions: {
+        joinMonster: {
+          sqlColumn: 'youtube_video_ids',
+        }
+      },
+    },
+  }),
+  extensions: {
+    joinMonster: {
+      sqlTable: 'player_socials',
+      uniqueKey: 'player_key',
+    },
+  },
+});
 
 export const getPlayerSocials = {
   type: new GraphQLList(PlayerSocials),

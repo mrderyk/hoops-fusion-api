@@ -2,12 +2,12 @@ import { GraphQLSchema } from 'graphql'
 import { GraphQLObjectType, GraphQLString } from 'graphql'
 import { getAllPlayerKeys } from './queries/getAllPlayerKeys';
 import { getPlayersByLetter } from './queries/getPlayersByLetter';
-import { player } from './queries/player';
-import { searchPlayers } from './queries/search';
-import { getPlayerStatsPerGame, getPlayerStatsPerGamePlayoffs } from './queries/per_game_stats';
-import { getPlayerTotalsRegular, getPlayerTotalsPlayoffs } from './queries/total_stats';
-import { getPlayerSocials } from './queries/socials';
-import { getChartData } from './queries/chart-data';
+import { getPlayer } from './queries/getPlayer';
+import { searchPlayers } from './queries/getPlayerSearch';
+import { getPlayerStatsPerGame, getPlayerStatsPerGamePlayoffs } from './queries/getPerGameStats';
+import { getPlayerTotalsRegular, getPlayerTotalsPlayoffs } from './queries/getTotalStats';
+import { getPlayerSocials } from './queries/getPlayerSocials';
+import { getChartData } from './queries/getChartData';
 import { getLeagueLeaders } from './queries/getLeagueLeaders'
 
 const QueryRoot = new GraphQLObjectType({
@@ -19,7 +19,7 @@ const QueryRoot = new GraphQLObjectType({
     },
     getPlayersByLetter,
     searchPlayers,
-    player,
+    getPlayer,
     getAllPlayerKeys,
     getPlayerStatsPerGame,
     getPlayerStatsPerGamePlayoffs,
