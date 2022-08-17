@@ -3,7 +3,7 @@ import { GraphQLObjectType, GraphQLString } from 'graphql'
 import { getAllPlayerKeys } from './queries/getAllPlayerKeys';
 import { getPlayersByLetter } from './queries/getPlayersByLetter';
 import { getPlayer } from './queries/getPlayer';
-import { searchPlayers } from './queries/getPlayerSearch';
+import { searchPlayers } from './queries/getSearchResults';
 import { getPlayerStatsPerGame, getPlayerStatsPerGamePlayoffs } from './queries/getPerGameStats';
 import { getPlayerTotalsRegular, getPlayerTotalsPlayoffs } from './queries/getTotalStats';
 import { getPlayerSocials } from './queries/getPlayerSocials';

@@ -1,4 +1,5 @@
 import {
+  GraphQLBoolean,
   GraphQLList,
   GraphQLObjectType,
   GraphQLString
@@ -54,6 +55,14 @@ const SearchResult = new GraphQLObjectType({
           sqlColumn: 'team_code',
         }
       }
+    },
+    twitter: {
+      type: GraphQLString,
+      extensions: {
+        joinMonster: {
+          sqlColumn: 'twitter',
+        }
+      }
     }
   })
 });
@@ -61,13 +70,21 @@ const SearchResult = new GraphQLObjectType({
 export const searchPlayers = {
   type: new GraphQLList(SearchResult),
   args: {
-    searchString: { type: GraphQLString }
+    searchString: { type: GraphQLString },
+    hasTwitter: { type: GraphQLBoolean }
   },
   extensions: {
     joinMonster: {
-      where: (playersTable: any , args: any, context: any) => {
+      where: (playersTable: any, args: any, context: any) => {
+        console.log(context);
         const searchString = args.searchString;
-        return `'${searchString}' = ANY(${playersTable}.search_tokens)`
+        let where = `'${searchString}' = ANY(${playersTable}.search_tokens)`;
+
+        if (args.hasTwitter) {
+          where = `${where} AND twitter IS NOT NULL`;
+        }
+
+        return where;
       },
     }
   },
