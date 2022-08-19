@@ -25,6 +25,14 @@ const PlayerSocials = new GraphQLObjectType({
         }
       },
     },
+    sneakerTokens: {
+      type: new GraphQLList(GraphQLString),
+      extensions: {
+        joinMonster: {
+          sqlColumn: 'sneaker_search_tokens',
+        }
+      },
+    },
   }),
   extensions: {
     joinMonster: {
