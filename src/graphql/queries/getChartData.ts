@@ -1,10 +1,8 @@
 import {
   GraphQLFloat,
-  GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLUnionType
 } from 'graphql';
 import { pool } from '../../pool';
 

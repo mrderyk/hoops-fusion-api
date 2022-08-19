@@ -15,6 +15,7 @@ const perGameBaseType = {
     }, 
     fg2pct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.fg2pct * 100).toFixed(2),
     }, 
     fg3a: {
       type: GraphQLFloat,
@@ -24,6 +25,7 @@ const perGameBaseType = {
     }, 
     fg3pct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.fg3pct * 100).toFixed(2),
     }, 
     fga: {
       type: GraphQLFloat,
@@ -33,6 +35,7 @@ const perGameBaseType = {
     }, 
     fgpct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.fgpct * 100).toFixed(2),
     }, 
     fta: {
       type: GraphQLFloat,
@@ -42,6 +45,7 @@ const perGameBaseType = {
     }, 
     ftpct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.ftpct * 100).toFixed(2),
     }, 
     oreb: {
       type: GraphQLFloat,
@@ -103,6 +107,7 @@ const totalsBaseType = {
     }, 
     fg2pct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.fg2pct * 100).toFixed(2),
     }, 
     fg3a: {
       type: GraphQLFloat,
@@ -112,6 +117,7 @@ const totalsBaseType = {
     }, 
     fg3pct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.fg3pct * 100).toFixed(2),
     }, 
     fga: {
       type: GraphQLFloat,
@@ -121,6 +127,7 @@ const totalsBaseType = {
     }, 
     fgpct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.fgpct * 100).toFixed(2),
     }, 
     fta: {
       type: GraphQLFloat,
@@ -130,6 +137,7 @@ const totalsBaseType = {
     }, 
     ftpct: {
       type: GraphQLFloat,
+      resolve: (row: any) => (row.ftpct * 100).toFixed(2),
     }, 
     oreb: {
       type: GraphQLFloat,

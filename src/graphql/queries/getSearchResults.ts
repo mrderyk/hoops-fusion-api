@@ -29,6 +29,9 @@ const SearchResult = new GraphQLObjectType({
     },
     highlights: {
       type: GraphQLList(GraphQLString),
+    },
+    sneakerTokens: {
+      type: GraphQLList(GraphQLString),
     }
   })
 });
@@ -38,10 +41,12 @@ export const searchPlayers = {
   args: {
     searchString: { type: GraphQLString },
     hasTwitter: { type: GraphQLBoolean },
-    hasHighlights: { type: GraphQLBoolean }
+    hasHighlights: { type: GraphQLBoolean },
+    hasSneakers: { type: GraphQLBoolean }
   },
   resolve: async (parent: any, args: any, context: any, resolveInfo: any) => {
-    const sql = buildSql(args.searchString, args.hasTwitter, args.hasHighlights);
+    const sql = buildSql(args.searchString, args.hasTwitter, args.hasHighlights, args.hasSneakers);
+    console.log(sql);
     const results = await pool.query(sql);
     return results.rows.map((row: any) => {
       const searchResult = {
@@ -60,12 +65,16 @@ export const searchPlayers = {
         (searchResult as any)['highlights'] = row.youtube_video_ids;
       }
 
+      if (row.sneaker_search_tokens) {
+        (searchResult as any)['sneakerTokens'] = row.sneaker_search_tokens;
+      }
+
       return searchResult;
     })
   }
 };
 
-const buildSql = (searchString: string, hasTwitter: boolean, hasHighlights: boolean): string => {
+const buildSql = (searchString: string, hasTwitter: boolean, hasHighlights: boolean, hasSneakers: boolean): string => {
   const fields = [
     'players.first_name',
     'players.last_name',
@@ -94,11 +103,18 @@ const buildSql = (searchString: string, hasTwitter: boolean, hasHighlights: bool
     conditions.push('player_socials.player_key = players.key');
   }
 
+  if (hasSneakers) {
+    fields.push('player_socials.sneaker_search_tokens');
+    tables.push('player_socials');
+    conditions.push('player_socials.sneaker_search_tokens IS NOT NULL')
+    conditions.push('player_socials.player_key = players.key');
+  }
+
   const query = `
     SELECT ${fields.join(',')}
     FROM ${tables}
     WHERE ${conditions.join(' AND ')}
   `; 
-   console.log(query);
+
   return query;
 };
