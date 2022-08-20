@@ -1,13 +1,21 @@
 const { Pool } = require('pg');
 
 // TODO: DRY up this and league leader compute for playoffs.
-const pool = new Pool({
+const connectConfig = {
   user: process.env.DATABASE_USER ?? 'postgres',
   host: process.env.DATABASE_HOST ?? 'localhost',
   database: process.env.DATABASE_NAME ?? 'hoopsfusion',
   password: process.env.DATABASE_PASSWORD ?? 'password',
   port: parseInt(process.env.DATABASE_PORT ?? '5432'),
-});
+};
+
+if (process.env.NODE_ENV === 'production') {
+  connectConfig.ssl = {
+    rejectUnauthorized: false
+  };
+}
+
+const pool = new Pool(connectConfig);
 
 const SEASON_TOTAL_GAMES = 82;
 const MIN_GAME_PERCENTAGE = 70;
